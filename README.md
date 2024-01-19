@@ -23,3 +23,12 @@ npm start
 ```
 ## Contributing
 If you'd like to contribute to this repository by adding new projects, improving existing ones, or fixing bugs, feel free to fork the repository and submit a pull request. Make sure to follow the [contribution guidelines]().
+
+## License
+This project is licensed under the MIT License, which means you are free to use, modify, and distribute the code.
+
+## Acknowledgments
+Special thanks to the React community and the contributors of various React libraries that made these projects possible. Your support and open-source contributions are highly appreciated!
+
+Happy coding! 🚀
+
