@@ -21,3 +21,5 @@ npm install
 ```
 npm start
 ```
+## Contributing
+If you'd like to contribute to this repository by adding new projects, improving existing ones, or fixing bugs, feel free to fork the repository and submit a pull request. Make sure to follow the [contribution guidelines]().
