@@ -6,6 +6,6 @@ Each project is designed to showcase specific React concepts and features, provi
 
 ## Getting Started
 1. Clone the repository to your local machine:
-  `git clone https://github.com/your-username/react-projects.git
+  ```git clone https://github.com/your-username/react-projects.git``
 `
 3. 
