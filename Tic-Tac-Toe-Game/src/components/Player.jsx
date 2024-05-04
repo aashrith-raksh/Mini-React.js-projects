@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Player({ initialName, symbol, isActive }) {
+export default function Player({ initialName, symbol, isActive, onPlayerNameChange }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentPlayerName, setcCurrentPlayerName] = useState(initialName);
   let editablePlayerName = (
@@ -28,7 +28,10 @@ export default function Player({ initialName, symbol, isActive }) {
         {editablePlayerName}
         <span className="player-logo">{symbol}</span>
       </span>
-      <button onClick={() => setIsEditing((prev) => !prev)}>
+      <button onClick={() => {
+        setIsEditing((prev) => !prev)
+        onPlayerNameChange(symbol, currentPlayerName)
+        }}>
         {isEditing ? "Save" : "Edit"}
       </button>
     </li>
