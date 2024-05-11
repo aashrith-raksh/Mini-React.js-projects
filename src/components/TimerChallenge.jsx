@@ -3,25 +3,35 @@ import {ResultScreen} from "./ResultScreen";
 
 export default function TimerChallenge({ title, targetTime }) {
   // HOOKS
-  const [timerExpired, setTimerExpired] = useState(false);
-  const [timerStarted, setTimerStarted] = useState(false);
+  // const [timerExpired, setTimerExpired] = useState(false);
+  // const [timerStarted, setTimerStarted] = useState(false);
 
+  const [timeRemaining, setTimeRemaining] = useState(targetTime*1000);
+  const timerIsActive = timeRemaining > 0 && timeRemaining < targetTime
+
+  
   // REFS
   const timer = useRef();
   const resultScreenRef = useRef();
 
   //   FUNCTIONS
+
+  if(timeRemaining <=0){
+    clearInterval(timer.current)
+    setTimeRemaining(targetTime)
+    resultScreenRef.current.open();
+  }
+
   function handleStartChallenge() {
-    setTimerStarted(true);
-    timer.current = setTimeout(() => {
-      setTimerExpired(true);
-      resultScreenRef.current.showModal();
-    }, targetTime * 1000);
+    timer.current = setInterval(() => {
+      setTimeRemaining(prevTime => prevTime - 100)
+    }, 100);
   }
 
   function handleStopChallenge() {
-    clearTimeout(timer.current);
-    setTimerStarted(false);
+    clearInterval(timer.current);
+    setTimeRemaining(targetTime);
+    resultScreenRef.current.open();
   }
 
   // RETURN
@@ -35,14 +45,14 @@ export default function TimerChallenge({ title, targetTime }) {
         </p>
         <p>
           <button
-            onClick={timerStarted ? handleStopChallenge : handleStartChallenge}
+            onClick={timerIsActive ? handleStopChallenge : handleStartChallenge}
           >
-            {timerStarted ? "Stop" : "Start"} Challenge
+            {timerIsActive ? "Stop" : "Start"} Challenge
           </button>
         </p>
 
-        <p className={timerStarted ? "active" : undefined}>
-          {timerStarted ? "Timer is running" : "Timer is Inactive"}
+        <p className={timerIsActive ? "active" : undefined}>
+          {timerIsActive ? "Timer is running" : "Timer is Inactive"}
         </p>
       </section>
     </>
