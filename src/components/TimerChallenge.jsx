@@ -7,7 +7,7 @@ export default function TimerChallenge({ title, targetTime }) {
   // const [timerStarted, setTimerStarted] = useState(false);
 
   const [timeRemaining, setTimeRemaining] = useState(targetTime*1000);
-  const timerIsActive = timeRemaining > 0 && timeRemaining < targetTime
+  const timerIsActive = timeRemaining > 0 && timeRemaining < targetTime*1000
 
   
   // REFS
@@ -18,8 +18,11 @@ export default function TimerChallenge({ title, targetTime }) {
 
   if(timeRemaining <=0){
     clearInterval(timer.current)
-    setTimeRemaining(targetTime)
     resultScreenRef.current.open();
+  }
+
+  function restartGame(){
+    setTimeRemaining(targetTime*1000)
   }
 
   function handleStartChallenge() {
@@ -30,14 +33,13 @@ export default function TimerChallenge({ title, targetTime }) {
 
   function handleStopChallenge() {
     clearInterval(timer.current);
-    setTimeRemaining(targetTime);
     resultScreenRef.current.open();
   }
 
   // RETURN
   return (
     <>
-      <ResultScreen result={"lost"} targetTime={targetTime} ref={resultScreenRef}/>
+      <ResultScreen timeRemaining = {timeRemaining} onReset={restartGame} targetTime={targetTime*1000} ref={resultScreenRef}/>
       <section className="challenge">
         <h2>{title}</h2>
         <p className="challenge-time">
