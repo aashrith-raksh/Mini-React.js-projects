@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from '/src/components/Input.jsx';
 
 export default function Login() {
   const [inputState, setInputState] = useState({
@@ -7,7 +8,6 @@ export default function Login() {
   });
 
   const [emailOutOfFocus, setEmailOutOfFocus] = useState(false);
-
   const emailIsInvalid =
     emailOutOfFocus &&
     inputState.email.length > 0 &&
@@ -33,29 +33,26 @@ export default function Login() {
       <h2>Login</h2>
 
       <div className="control-row">
-        <div className="control no-margin">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            onChange={handleInputChange}
-            onBlur={handleOutOfFocus}
-            value={inputState.email}
-          />
-          <div>{emailIsInvalid && <p>Please enter a valid email</p>}</div>
-        </div>
+        <Input
+          label = "Email"
+          id="email"
+          type="email"
+          name="email"
+          onChange={handleInputChange}
+          onBlur={handleOutOfFocus}
+          value={inputState.email}
+          error={emailIsInvalid && <p>Please enter a valid email</p>}
+        />
 
-        <div className="control no-margin">
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            onChange={handleInputChange}
-            value={inputState.password}
-          />
-        </div>
+        <Input
+          label = "Password"
+          id="password"
+          type="password"
+          name="password"
+          onChange={handleInputChange}
+          value={inputState.password}
+          error={""}
+        />
       </div>
 
       <p className="form-actions">
